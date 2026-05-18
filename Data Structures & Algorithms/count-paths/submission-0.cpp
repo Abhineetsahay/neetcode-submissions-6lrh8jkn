@@ -1,0 +1,18 @@
+class Solution {
+   private:
+    vector<vector<int>> dp;
+    int f(int i, int j, int m, int n) {
+        if (i == (m - 1) && j == (n - 1)) return 1;
+
+        if (i >= m || j >= n) return 0;
+        if (dp[i][j] != -1) return dp[i][j];
+
+        return dp[i][j] = f(i, j + 1, m, n) + f(i + 1, j, m, n);
+    }
+
+   public:
+    int uniquePaths(int m, int n) {
+        dp.assign(m, vector<int>(n, -1));
+        return f(0, 0, m, n);
+    }
+};
